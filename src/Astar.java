@@ -71,10 +71,26 @@ public class Astar extends SearchMethod
      */
     private Node getNextToVisit()
     {
-        //Pick first node...
-        Node bestNode = open.elementAt(0);
-        
-        return bestNode;
+        Vector<Double> weights = new Vector<>(open.size());
+        for (int i = 0; i < open.size(); i++) {
+            weights.add(0.0);
+        }
+
+        for (int i = 0; i < open.size(); i++) {
+            double weight
+                    = Math.sqrt(Math.pow(end.x - open.get(i).x, 2)
+                    + Math.pow(end.y - open.get(i).y, 2));
+            calculateActualCost(open.get(i));
+            weight += open.get(i).actual;
+            weights.set(i, weight);
+        }
+
+        double maxDistance = Collections.min(weights);
+        int maxIndex = weights.indexOf(maxDistance);
+
+        System.out.println(open.size());
+
+        return open.remove(maxIndex);
     }
     
     /**

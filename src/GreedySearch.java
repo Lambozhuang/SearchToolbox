@@ -71,9 +71,6 @@ public class GreedySearch extends SearchMethod
      */
     private Node getNextToVisit()
     {
-        //Pick first node...
-//        Node bestNode = open.elementAt(0);
-
         Vector<Double> distances = new Vector<>(open.size());
         for (int i = 0; i < open.size(); i++) {
             distances.add(0.0);
