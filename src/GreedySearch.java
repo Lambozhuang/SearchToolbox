@@ -72,8 +72,25 @@ public class GreedySearch extends SearchMethod
     private Node getNextToVisit()
     {
         //Pick first node...
-        Node bestNode = open.elementAt(0);
-        
-        return bestNode;
+//        Node bestNode = open.elementAt(0);
+
+        Vector<Double> distances = new Vector<>(open.size());
+        for (int i = 0; i < open.size(); i++) {
+            distances.add(0.0);
+        }
+
+        for (int i = 0; i < open.size(); i++) {
+            double distance
+                    = Math.sqrt(Math.pow(end.x - open.get(i).x, 2)
+                    + Math.pow(end.y - open.get(i).y, 2));
+            distances.set(i, distance);
+        }
+
+        double maxDistance = Collections.min(distances);
+        int maxIndex = distances.indexOf(maxDistance);
+
+        System.out.println(open.size());
+
+        return open.remove(maxIndex);
     }
 }
